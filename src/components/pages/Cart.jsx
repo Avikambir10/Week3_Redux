@@ -1,10 +1,12 @@
 import React from 'react';
 import CartCard from '../reusable/CartCard';
 import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 const Cart = () => {
 
     let cart = useSelector((myStore) => myStore.cartStore.cart);
+    const navigate = useNavigate();
 
     // Calculate totals based on mock data
     const subtotal = cart.reduce((acc, item) => acc + (item.price * item.qty), 0);
@@ -56,7 +58,10 @@ const Cart = () => {
 
 
                         {/* Checkout Button */}
-                        <button className="w-full bg-indigo-600 hover:bg-indigo-500 active:bg-indigo-700 text-white font-bold py-3 px-4 rounded-lg transition-colors duration-200">
+                        <button
+                            onClick={() => navigate('/payment')}
+                            className="w-full bg-indigo-600 hover:bg-indigo-500 active:bg-indigo-700 text-white font-bold py-3 px-4 rounded-lg transition-colors duration-200"
+                        >
                             Pay ${total.toFixed(2)}
                         </button>
 
